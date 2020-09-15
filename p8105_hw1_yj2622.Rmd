@@ -26,7 +26,7 @@ df_1 <- tibble(
 )
 ```
 
-Then I take the **mean** of each variable in the data frame:
+Then I take the `mean` of each variable in the data frame:
 
 ```{r df_mean}
 mean(df_1$norm_samp)
@@ -35,4 +35,5 @@ mean(df_1$char)
 mean(df_1$factor)
 ```
 
-According to the outcome above, **mean** function works on _numeric_ and _logical_ variables, but doesn't work onr _character_ and _factor_ variables. 
+According to the outcome above, `mean` function works on **numeric** and **logical** variables, but doesn't work on **character** and **factor** variables. 
+
