@@ -5,3 +5,10 @@ date: "2020/9/15"
 output: github_document
 ---
 
+This is the first homework of P8105!
+
+# Problem 1
+
+```{r setup,include = FALSE}
+library(tidyverse)
+```
