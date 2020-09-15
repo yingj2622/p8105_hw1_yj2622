@@ -45,7 +45,7 @@ as.numeric(prob1_df$factor_vec)
 
 According to the results which are not shown here, **logical** and **factor** variables can be converted into numeric, while **character** variable can not. I think that's  because **logical** and **factor** values are stored as integers rather than characters in computer. In this way, the reason why `mean` function works on **logical** variable but not on **character** variable is clear. However, it can't help to explain why I can't get mean of the factor variable by applying `mean` function.
 
-At last, I do some conversation and mathematical manipulation on these variables:
+At last, I do some conversation and multiplication on these variables:
 
 ```{r convert_multiply}
 as.numeric(prob1_df$samp_gt_0)*prob1_df$norm_samp
@@ -53,3 +53,19 @@ as.factor(prob1_df$samp_gt_0)*prob1_df$norm_samp
 as.numeric(as.factor(prob1_df$samp_gt_0))*prob1_df$norm_samp
 ```
 
+## Problem 2
+
+First I load the `penguins` dataset:
+
+```{r load_data}
+data("penguins", package = "palmerpenguins")
+```
+
+* Brief Description of `penguins`
+  * It includes the species, island, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g,sex and year.
+    * Species include Adelie, Gentoo and Chinstrap.
+    * Islands include Torgersen, Biscoe and Dream
+    * Sex is male  or female or NA 
+    * Years include 2007,2008 and 2009
+  * It has `r nrow(penguins)` rows and `r ncol(penguins)` columns.
+  * The mean flipper length is `r round(mean(pull(penguins,flipper_length_mm),na.rm = TRUE),digits = 2)`.
