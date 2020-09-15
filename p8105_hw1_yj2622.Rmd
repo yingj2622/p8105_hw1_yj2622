@@ -19,7 +19,20 @@ First I create a data frame:
 df_1 <- tibble(
   norm_samp = rnorm(10),
   logical = norm_samp > 0,
-  char = c('a','b','c','d','e','f','g','h','i','g'),
-  factor = factor(c('l','l','s','m','m','s','l','s','m','l'))
+  char = c('a','b','c','d','e',
+           'f','g','h','i','g'),
+  factor = factor(c('l','l','s','m',
+                    'm','s','l','s','m','l'))
 )
 ```
+
+Then I take the **mean** of each variable in the data frame:
+
+```{r df_mean}
+mean(df_1$norm_samp)
+mean(df_1$logical)
+mean(df_1$char)
+mean(df_1$factor)
+```
+
+According to the outcome above, **mean** function works on _numeric_ and _logical_ variables, but doesn't work onr _character_ and _factor_ variables. 
