@@ -12,3 +12,14 @@ This is the first homework of P8105!
 ```{r setup,include = FALSE}
 library(tidyverse)
 ```
+
+First I create a data frame:
+
+```{r df_create}
+df_1 <- tibble(
+  norm_samp = rnorm(10),
+  logical = norm_samp > 0,
+  char = c('a','b','c','d','e','f','g','h','i','g'),
+  factor = factor(c('l','l','s','m','m','s','l','s','m','l'))
+)
+```
