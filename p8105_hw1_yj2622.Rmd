@@ -19,10 +19,8 @@ First I create a data frame:
 prob1_df <- tibble(
   norm_samp = rnorm(10),
   samp_gt_0 = norm_samp > 0,
-  char_vec = c('a','b','c','d','e',
-           'f','g','h','i','g'),
-  factor_vec = factor(c('l','l','s','m',
-                    'm','s','l','s','m','l'))
+  char_vec = c('a','b','c','d','e','f','g','h','i','g'),
+  factor_vec = factor(c('l','l','s','m','m','s','l','s','m','l'))
 )
 ```
 
@@ -46,3 +44,12 @@ as.numeric(prob1_df$factor_vec)
 ```
 
 According to the results which are not shown here, **logical** and **factor** variables can be converted into numeric, while **character** variable can not. I think that's  because **logical** and **factor** values are stored as integers rather than characters in computer. In this way, the reason why `mean` function works on **logical** variable but not on **character** variable is clear. However, it can't help to explain why I can't get mean of the factor variable by applying `mean` function.
+
+At last, I do some conversation and mathematical manipulation on these variables:
+
+```{r convert_multiply}
+as.numeric(prob1_df$samp_gt_0)*prob1_df$norm_samp
+as.factor(prob1_df$samp_gt_0)*prob1_df$norm_samp
+as.numeric(as.factor(prob1_df$samp_gt_0))*prob1_df$norm_samp
+```
+
