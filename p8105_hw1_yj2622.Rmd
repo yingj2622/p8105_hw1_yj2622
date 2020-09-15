@@ -1,0 +1,7 @@
+---
+title: "p8105_hw1_yj2622"
+author: "Ying Jin"
+date: "2020/9/15"
+output: github_document
+---
+
