@@ -5,13 +5,14 @@ date: "2020/9/15"
 output: github_document
 ---
 
-This is the first homework of P8105!
-
-## Problem 1
+This is the first homework of P8105.
 
 ```{r setup,include = FALSE}
 library(tidyverse)
+library(ggplot2)
 ```
+
+## Problem 1
 
 First I create a data frame:
 
@@ -69,3 +70,10 @@ data("penguins", package = "palmerpenguins")
     * Years include 2007,2008 and 2009
   * It has `r nrow(penguins)` rows and `r ncol(penguins)` columns.
   * The mean flipper length is `r round(mean(pull(penguins,flipper_length_mm),na.rm = TRUE),digits = 2)`.
+  
+Then I make a scatter plot of `flipper_length_mm` vs `bill_length_mm, with `species` as color points:
+
+```{r}
+ggplot(penguins,aes(x = bill_length_mm,y = flipper_length_mm,color = species)) + geom_point()
+```
+
