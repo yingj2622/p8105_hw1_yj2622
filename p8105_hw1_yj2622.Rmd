@@ -7,12 +7,11 @@ output: github_document
 
 This is the first homework of P8105.
 
-```{r setup,include = FALSE}
-library(tidyverse)
-library(ggplot2)
-```
-
 ## Problem 1
+
+```{r setup_1,include = FALSE}
+library(tidyverse)
+```
 
 First I create a data frame:
 
@@ -28,10 +27,10 @@ prob1_df <- tibble(
 Then I take the `mean` of each variable in the data frame:
 
 ```{r df_mean}
-mean(prob1_df$norm_samp)
-mean(prob1_df$samp_gt_0)
-mean(prob1_df$char_vec)
-mean(prob1_df$factor_vec)
+mean(pull(prob1_df,norm_samp))
+mean(pull(prob1_df,samp_gt_0))
+mean(pull(prob1_df,char_vec))
+mean(pull(prob1_df,factor_vec))
 ```
 
 According to the outcome above, `mean` function works on **numeric** and **logical** variables, but doesn't work on **character** and **factor** variables. 
@@ -39,9 +38,9 @@ According to the outcome above, `mean` function works on **numeric** and **logic
 Next I apply `as.numeric` function to the **logical**,**character** and **factor** variables:
 
 ```{r as_numeric,eval = FALSE}
-as.numeric(prob1_df$samp_gt_0)
-as.numeric(prob1_df$char_vec)
-as.numeric(prob1_df$factor_vec)
+as.numeric(pull(prob1_df,samp_gt_0))
+as.numeric(pull(prob1_df,char_vec))
+as.numeric(pull(prob1_df,factor_vec))
 ```
 
 According to the results which are not shown here, **logical** and **factor** variables can be converted into numeric, while **character** variable can not. I think that's  because **logical** and **factor** values are stored as integers rather than characters in computer. In this way, the reason why `mean` function works on **logical** variable but not on **character** variable is clear. However, it can't help to explain why I can't get mean of the factor variable by applying `mean` function.
@@ -49,12 +48,16 @@ According to the results which are not shown here, **logical** and **factor** va
 At last, I do some conversation and multiplication on these variables:
 
 ```{r convert_multiply}
-as.numeric(prob1_df$samp_gt_0)*prob1_df$norm_samp
-as.factor(prob1_df$samp_gt_0)*prob1_df$norm_samp
-as.numeric(as.factor(prob1_df$samp_gt_0))*prob1_df$norm_samp
+as.numeric(pull(prob1_df,samp_gt_0))*pull(prob1_df,norm_samp)
+as.factor(pull(prob1_df,samp_gt_0))*pull(prob1_df,norm_samp)
+as.numeric(as.factor(pull(prob1_df,samp_gt_0)))*pull(prob1_df,norm_samp)
 ```
 
 ## Problem 2
+
+```{r setup_2,include = FALSE}
+library(ggplot2)
+```
 
 First I load the `penguins` dataset:
 
@@ -69,7 +72,7 @@ Then I make a description of `penguins` dataset:
     * species include `r levels(pull(penguins,species))`.
     * island include `r levels(pull(penguins,island))`.
     * bill_length_mm ranges from `r min(pull(penguins,bill_length_mm),na.rm = T)` mm to `r max(pull(penguins,bill_length_mm),na.rm = T)` mm, with the median of `r median(pull(penguins,bill_length_mm),na.rm = T)` mm.
-    * bill_depth_mm ranges from `r min(pull(penguins,bill_depth_mm),na.rm = T)` mm to `r max(pull(penguins,bill_depth_mm),na.rm = T)` mm, with he median of `r median(pull(penguins,bill_depth_mm),na.rm = T)` mm.
+    * bill_depth_mm ranges from `r min(pull(penguins,bill_depth_mm),na.rm = T)` mm to `r max(pull(penguins,bill_depth_mm),na.rm = T)` mm, with the median of `r median(pull(penguins,bill_depth_mm),na.rm = T)` mm.
     * flipper_length_mm ranges from `r min(pull(penguins,flipper_length_mm),na.rm = T)` mm to `r max(pull(penguins,flipper_length_mm),na.rm = T)` mm, with the median of `r median(pull(penguins,flipper_length_mm),na.rm = T)` mm.
     * body_mass_g ranges from `r min(pull(penguins,body_mass_g),na.rm = T)` g to `r max(pull(penguins,body_mass_g),na.rm = T)` g, with the median of `r median(pull(penguins,body_mass_g),na.rm = T)` g.
     * sex is `r levels(pull(penguins,sex))`. 
@@ -83,7 +86,7 @@ Next I make a scatter plot of `flipper_length_mm` vs `bill_length_mm`, with `spe
 ggplot(penguins,aes(x = bill_length_mm,y = flipper_length_mm,color = species)) + geom_point()
 ```
 
-Last, I export the scatter plot:
+Last, I export the scatter plot to my project directory:
 
 ```{r}
 ggsave("flipper_length_vs_bill_length.png",path = here::here())
