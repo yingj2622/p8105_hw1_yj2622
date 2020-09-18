@@ -62,18 +62,30 @@ First I load the `penguins` dataset:
 data("penguins", package = "palmerpenguins")
 ```
 
+Then I make a description of `penguins` dataset:
+
 * Brief Description of `penguins`
-  * It includes the species, island, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g,sex and year.
-    * Species include Adelie, Gentoo and Chinstrap.
-    * Islands include Torgersen, Biscoe and Dream
-    * Sex is male  or female or NA 
-    * Years include 2007,2008 and 2009
+  * The variables include `r names(penguins)`.
+    * species include `r levels(pull(penguins,species))`.
+    * island include `r levels(pull(penguins,island))`.
+    * bill_length_mm ranges from `r min(pull(penguins,bill_length_mm),na.rm = T)` mm to `r max(pull(penguins,bill_length_mm),na.rm = T)` mm, with the median of `r median(pull(penguins,bill_length_mm),na.rm = T)` mm.
+    * bill_depth_mm ranges from `r min(pull(penguins,bill_depth_mm),na.rm = T)` mm to `r max(pull(penguins,bill_depth_mm),na.rm = T)` mm, with he median of `r median(pull(penguins,bill_depth_mm),na.rm = T)` mm.
+    * flipper_length_mm ranges from `r min(pull(penguins,flipper_length_mm),na.rm = T)` mm to `r max(pull(penguins,flipper_length_mm),na.rm = T)` mm, with the median of `r median(pull(penguins,flipper_length_mm),na.rm = T)` mm.
+    * body_mass_g ranges from `r min(pull(penguins,body_mass_g),na.rm = T)` g to `r max(pull(penguins,body_mass_g),na.rm = T)` g, with the median of `r median(pull(penguins,body_mass_g),na.rm = T)` g.
+    * sex is `r levels(pull(penguins,sex))`. 
+    * year includes `r unique(pull(penguins,year))`.
   * It has `r nrow(penguins)` rows and `r ncol(penguins)` columns.
-  * The mean flipper length is `r round(mean(pull(penguins,flipper_length_mm),na.rm = TRUE),digits = 2)`.
+  * The mean flipper length is `r round(mean(pull(penguins,flipper_length_mm),na.rm = TRUE),digits = 2)` mm.
   
-Then I make a scatter plot of `flipper_length_mm` vs `bill_length_mm, with `species` as color points:
+Next I make a scatter plot of `flipper_length_mm` vs `bill_length_mm`, with `species` as color points:
 
 ```{r}
 ggplot(penguins,aes(x = bill_length_mm,y = flipper_length_mm,color = species)) + geom_point()
+```
+
+Last, I export the scatter plot:
+
+```{r}
+ggsave("flipper_length_vs_bill_length.png",path = here::here())
 ```
 
